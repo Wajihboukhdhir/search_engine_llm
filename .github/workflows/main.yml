@@ -14,9 +14,14 @@ jobs:
         with:
           fetch-depth: 0
           lfs: true
+
       - name: Pull changes from Hugging Face Space
-        run: git pull https://huggingface.co/spaces/WajihB/search_engine_groq main || echo "No changes to pull"
+        run: |
+          git fetch origin  # Fetch the latest changes from Hugging Face Space
+          git pull origin main  # Pull changes into the local branch
+
       - name: Push to Hugging Face Space
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
-        run: git push https://WajihB:${{ secrets.HF_TOKEN }}@huggingface.co/spaces/WajihB/search_engine_groq main
+        run: |
+          git push https://WajihB:${{ secrets.HF_TOKEN }}@huggingface.co/spaces/WajihB/search_engine_groq main
