@@ -14,7 +14,11 @@ jobs:
         with:
           fetch-depth: 0
           lfs: true
-      - name: Push to hub
+      - name: Set up Hugging Face token
+        run: git config --global credential.helper store
+      - name: Push to Hugging Face Space
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
-        run: git push https://huggingface.co/spaces/WajihB/search_engine_groq main
+        run: |
+          git remote set-url origin https://huggingface.co/spaces/WajihB/search_engine_groq
+          git push https://huggingface.co/spaces/WajihB/search_engine_groq main
