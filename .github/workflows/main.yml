@@ -15,13 +15,13 @@ jobs:
           fetch-depth: 0
           lfs: true
 
-      - name: Pull the latest changes from Hugging Face Space
+      - name: Fetch and reset to remote state
         run: |
-          git fetch origin  # Fetch the latest changes from Hugging Face Space
-          git pull origin main  # Merge remote changes into local main branch
+          git fetch origin  # Fetch latest changes from the remote repository
+          git reset --hard origin/main  # Reset local branch to match the remote
 
-      - name: Push to Hugging Face Space
+      - name: Push changes to Hugging Face Space
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
-          git push https://WajihB:${{ secrets.HF_TOKEN }}@huggingface.co/spaces/WajihB/search_engine_groq main
+          git push --force https://WajihB:${{ secrets.HF_TOKEN }}@huggingface.co/spaces/WajihB/search_engine_groq main
