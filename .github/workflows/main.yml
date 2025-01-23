@@ -14,7 +14,9 @@ jobs:
         with:
           fetch-depth: 0
           lfs: true
-      - name: Push to hub
+      - name: Pull changes from Hugging Face Space
+        run: git pull https://huggingface.co/spaces/WajihB/search_engine_groq main || echo "No changes to pull"
+      - name: Push to Hugging Face Space
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
-        run: git push https://WajihB:$HF_TOKEN@huggingface.co/spaces/WajihB/search_engine_groq main
+        run: git push https://WajihB:${{ secrets.HF_TOKEN }}@huggingface.co/spaces/WajihB/search_engine_groq main
